@@ -16,12 +16,12 @@
 		"image_offer": "UbuntuServer",
 		"image_sku": "18.04-LTS",
 
-		"managed_image_resource_group_name": "udacity-azure-rg",
+		"managed_image_resource_group_name": "udacity-rg",
 		"managed_image_name": "udacityAzureImage",
 		
 		"azure_tags": {
 			"type": "Web Server",
-			"env": "Production"
+			"environment": "Production"
 		},
 
 		"location": "UK South",
