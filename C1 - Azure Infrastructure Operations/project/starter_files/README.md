@@ -19,6 +19,26 @@ For this project, you will write a Packer template and a Terraform template to d
 ### Instructions
 **Your words here**
 
+packer build server.json
+
+az vm create \
+    --resource-group myResourceGroup \
+    --name myVM \
+    --image myPackerImage \
+    --admin-username azureuser \
+    --generate-ssh-keys
+
+
+az vm open-port \
+    --resource-group myResourceGroup \
+    --name myVM \
+    --port 80
+
 ### Output
 **Your words here**
 
+
+
+az policy definition create --name 'tagging-policy' --display-name 'Add a tag to resources' --description 'Prevents the creation of any resource missing a tag.' --rules 'tagpolicy.rules.json' --mode Indexed
+
+az policy assignment create --name "tagging-policy" --scope "/subscriptions/b8acf670-45b1-4124-b6ce-a294c1583634" --policy "tagging-policy"
