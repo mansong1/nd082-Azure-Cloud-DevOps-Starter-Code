@@ -1,0 +1,20 @@
+{
+    "properties": {
+      "displayName": "tagging-policy",
+      "policyType": "BuiltIn",
+      "mode": "Indexed",
+      "description": "Prevents the creation of any resource missing a tag.",
+      "metadata": {
+        "category": "Tags"
+      },
+      "policyRule": {
+        "if": {
+              "field": "tags",
+              "exists": "false"
+            }
+        },
+        "then": {
+          "effect": "deny"
+        }
+      }
+}
