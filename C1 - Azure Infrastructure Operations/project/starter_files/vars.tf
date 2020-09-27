@@ -12,3 +12,8 @@ variable "instance_count" {
     type = number
     description = "The number of virtual machines instances"
 }
+
+variable "instance_size" {
+  type = string
+  description = "Virtual Machine Size type"
+}
