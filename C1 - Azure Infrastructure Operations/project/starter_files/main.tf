@@ -77,3 +77,42 @@ resource "azurerm_network_interface_backend_address_pool_association" "main" {
   ip_configuration_name   = "primary"
   network_interface_id    = element(azurerm_network_interface.main.*.id, count.index)
 }
+
+resource "azurerm_linux_virtual_machine" "main" {
+  name                            = "${var.prefix}-vm"
+  resource_group_name             = azurerm_resource_group.main.name
+  location                        = azurerm_resource_group.main.location
+  size                            = "Standard_F2s_v2"
+  admin_username                  = "adminuser"
+  admin_password                  = "P@ssw0rd1234!"
+  disable_password_authentication = false
+  network_interface_ids = [
+    azurerm_network_interface.main.id,
+  ]
+
+  source_image_reference {
+    publisher = "Canonical"
+    offer     = "UbuntuServer"
+    sku       = "16.04-LTS"
+    version   = "latest"
+  }
+
+  os_disk {
+    storage_account_type = "Standard_LRS"
+    caching              = "ReadWrite"
+
+    diff_disk_settings {
+      option = "Local"
+    }
+  }
+}
+
+resource "azurestack_availability_set" "test" {
+  name                = "acceptanceTestAvailabilitySet1"
+  location            = "${azurestack_resource_group.test.location}"
+  resource_group_name = "${azurestack_resource_group.test.name}"
+
+  tags = {
+    environment = "Production"
+  }
+}
